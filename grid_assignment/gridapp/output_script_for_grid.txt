@@ -1,0 +1,114 @@
+at none granularity
+------------------------------------------------
+Test:: Grid 2 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 3 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 4 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 5 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 6 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 7 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 8 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 9 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Test:: Grid 10 Thread 10
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+***********************************************
+at cell granularity
+------------------------------------------------
+Test:: Grid 2 Thread 10

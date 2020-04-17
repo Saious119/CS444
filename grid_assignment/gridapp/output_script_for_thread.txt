@@ -1,0 +1,234 @@
+at none granularity
+------------------------------------------------
+Grid: 10 Thread: 1 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 2 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 3 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 4 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 5 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 6 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 7 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 8 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 9 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 10 Test
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+DATA INTEGRITY VIOLATION!!!!!
+Secs elapsed:  20
+***********************************************
+***********************************************
+at cell granularity
+------------------------------------------------
+Grid: 10 Thread: 1 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 2 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  21
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  21
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+***********************************************
+Grid: 10 Thread: 3 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+***********************************************
+Grid: 10 Thread: 4 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  21
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  20
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+***********************************************
+Grid: 10 Thread: 5 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  25
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+***********************************************
+Grid: 10 Thread: 6 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  29
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  23
+***********************************************
+Grid: 10 Thread: 7 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  25
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  22
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  27
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  25
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  26
+***********************************************
+Grid: 10 Thread: 8 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  25
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  24
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  26
+***********************************************
+Grid: 10 Thread: 9 Test
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  25
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  27
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  26
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  28
+DATA INTEGRITY MAINTAINED!!!!!
+Secs elapsed:  26
+***********************************************
+Grid: 10 Thread: 10 Test
