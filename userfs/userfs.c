@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 			if (cmd->VarNum != 3){
 				fprintf(stderr, "u_export userfsFileName externalFileName \n");
 			} else {
-				if (!u_export(cmd->VarList[1], cmd->VarList[1])) {
+				if (!u_export(cmd->VarList[1], cmd->VarList[2])) {
 					fprintf(stderr, "Unable to export userfs file %s to external file %s\n", cmd->VarList[1], cmd->VarList[2]);
 				}
 			}
@@ -314,31 +314,91 @@ int u_import(char* linux_file, char* u_file) {
 
 	/* write rest of code for importing the file.
 	   return 1 for success, 0 for failure */
-
+	
 
 	/* here are some things to think about (not guaranteed to
 	   be an exhaustive list !) */
 
 	/* check you can open the file to be imported for reading
 	   how big is it?? */
+	struct stat st;
+	stat(linux_file, &st);
+	int fileSize= st.st_size; 
 
 	/* check there is enough free space */
-
+	if((fileSize/ BLOCK_SIZE_BYTES) > u_quota()){
+		printf("%s too large, not enough free space.\n", linux_file);
+		return 0;
+	}
 	/* check file name is short enough */
-
+	if(strlen(u_file) > MAX_FILE_NAME_SIZE){
+		printf("filename too large");
+		return 0;
+	}
 	/* check that file does not already exist - if it
 	   does can just print a warning
 	   could also delete the old and then import the new */
+	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
+		if(!(dir.u_file[i].free)) {
+			if(u_file == dir.u_file[i].file_name){
+				printf("warning: %s already exists", u_file);
+				return 0; 
+			}
+		}
+	}
 
 	/* check total file length is small enough to be
 	   represented in MAX_BLOCKS_PER_FILE */
+	if((fileSize/BLOCK_SIZE_BYTES) > MAX_BLOCKS_PER_FILE){
+		printf("%s exceeds max block per file allowed", linux_file);
+		return 0;
+	}
 
 	/* check there is a free inode */
+	int free_inodes_counter = 0;
+	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
+		read_inode(dir.u_file[i].inode_number, &curr_inode);
+		if(curr_inode.free == TRUE){
+			free_inodes_counter++;
+		}
+	}
+	if(free_inodes_counter == 0){
+		printf("error, no indoes available");
+		return 0;
+	}
 
 	/* check there is room in the directory */
+	int free_dir = 0;
+	for(int i = 0; i<MAX_FILES_PER_DIRECTORY; i++){
+		if(dir.u_file[i].free == TRUE){
+			free_dir++
+		}
+	}
+	if(free_dir == 0){
+		printf("error: no free room in the directory");
+		return 0;
+	}
 
 	/* then update the structures: what all needs to be updates?  
 	   bitmap, directory, inode, datablocks, superblock(?) */
+	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
+		read_inode(dir.u_file[i].inode_number, &curr_inode);
+		if(curr_inode.free == TRUE){
+			write_inode(i, &curr_inode);
+			dir.u_file[i].free = 0;
+			break;
+		}
+	}
+	int to_allocate = fileSize / BLOCK_SIZE_BYTES;
+	for(int i = 0; i < sb.disk_size_blocks; i++) {
+        if (bit_map[i] == 0) {
+            allocate_block(i);
+            to_allocate--;
+            if(to_allocate <= 0){
+                break;
+			}
+        }
+    }
 
 	/* what order will you update them in? how will you detect 
 	   a partial operation if it crashes part way through? */

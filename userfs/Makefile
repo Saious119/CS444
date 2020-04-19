@@ -9,7 +9,7 @@ CFLAGS = $(COMPILER_WARNINGS) $(GDB_FLAGS)
 all: userfs
 
 userfs: userfs.c parse.c crash.c
-	$(CC) $(CFLAGS) userfs.c  parse.c crash.c -o userfs $(LS_LIBS)
+	$(CC) $(CFLAGS) userfs.c  parse.c crash.c -o userfs $(LD_LIBS)
 
 clean:
 	/bin/rm -f userfs *.o *~
