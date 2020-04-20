@@ -1,5 +1,16 @@
+Andy Mahoney 0733921
+userfs.c - where all the work was done, this contains all the core user functions and handles all file I/O
+userfs.h - header file containing constants and datastructures used in userfs.c 
+crash.c / crash.h - code that calculates when to crash, then crashes the system.
+parse.c/parse.h - parsing for commands 
+Makefile- use make to compile the files 
+writeUp.docx - where the write up is
+
+
 
 Try:
 
  ./userfs -reformat 200000 foo
  ./userfs foo
+
+ 

@@ -12,6 +12,7 @@
 #include "parse.h"
 #include "userfs.h"
 #include "crash.h"
+#include <math.h>
 
 /* GLOBAL  VARIABLES */
 int virtual_disk;
@@ -310,7 +311,7 @@ int u_import(char* linux_file, char* u_file) {
 
 	read(handle,&buffer,BLOCK_SIZE_BYTES);
 
-	crash_write(virtual_disk, &buffer, 1999);
+	crash_write(virtual_disk, &buffer, BLOCK_SIZE_BYTES);
 
 	/* write rest of code for importing the file.
 	   return 1 for success, 0 for failure */
@@ -332,7 +333,7 @@ int u_import(char* linux_file, char* u_file) {
 	}
 	/* check file name is short enough */
 	if(strlen(u_file) > MAX_FILE_NAME_SIZE){
-		printf("filename too large");
+		printf("filename too large\n");
 		return 0;
 	}
 	/* check that file does not already exist - if it
@@ -340,8 +341,8 @@ int u_import(char* linux_file, char* u_file) {
 	   could also delete the old and then import the new */
 	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
 		if(!(dir.u_file[i].free)) {
-			if(u_file == dir.u_file[i].file_name){
-				printf("warning: %s already exists", u_file);
+			if(strcmp(u_file, dir.u_file[i].file_name) == 0){
+				printf("warning: %s already exists\n", u_file);
 				return 0; 
 			}
 		}
@@ -350,20 +351,20 @@ int u_import(char* linux_file, char* u_file) {
 	/* check total file length is small enough to be
 	   represented in MAX_BLOCKS_PER_FILE */
 	if((fileSize/BLOCK_SIZE_BYTES) > MAX_BLOCKS_PER_FILE){
-		printf("%s exceeds max block per file allowed", linux_file);
+		printf("%s exceeds max block per file allowed\n", linux_file);
 		return 0;
 	}
 
 	/* check there is a free inode */
 	int free_inodes_counter = 0;
-	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
-		read_inode(dir.u_file[i].inode_number, &curr_inode);
+	for(int i = 0; i < MAX_INODES; i++){
+		read_inode(i, &curr_inode);
 		if(curr_inode.free == TRUE){
 			free_inodes_counter++;
 		}
 	}
 	if(free_inodes_counter == 0){
-		printf("error, no indoes available");
+		printf("error, no inodes available\n");
 		return 0;
 	}
 
@@ -371,39 +372,53 @@ int u_import(char* linux_file, char* u_file) {
 	int free_dir = 0;
 	for(int i = 0; i<MAX_FILES_PER_DIRECTORY; i++){
 		if(dir.u_file[i].free == TRUE){
-			free_dir++
+			free_dir++;
 		}
 	}
 	if(free_dir == 0){
-		printf("error: no free room in the directory");
+		printf("error: no free room in the directory\n");
 		return 0;
 	}
 
 	/* then update the structures: what all needs to be updates?  
 	   bitmap, directory, inode, datablocks, superblock(?) */
-	for(int i = 0; i < MAX_FILES_PER_DIRECTORY; i++){
-		read_inode(dir.u_file[i].inode_number, &curr_inode);
-		if(curr_inode.free == TRUE){
-			write_inode(i, &curr_inode);
-			dir.u_file[i].free = 0;
-			break;
-		}
-	}
+	
+	int node_index;
+	for (int i = 0; i < MAX_FILES_PER_DIRECTORY; i++) {
+        read_inode(i, &curr_inode);
+        if(curr_inode.free) {
+			node_index = i;
+            curr_inode.num_blocks = floor((fileSize/BLOCK_SIZE_BYTES) + 1);
+            curr_inode.file_size_bytes = fileSize;
+            curr_inode.last_modified = time(0);
+            curr_inode.free = 0;
+            write_inode(i, &curr_inode);
+            dir.u_file[i].free = 0;
+            dir.u_file[i].inode_number = i;
+            strcpy(dir.u_file[i].file_name, u_file);
+            break;
+        }
+    }
 	int to_allocate = fileSize / BLOCK_SIZE_BYTES;
+	int blockIndex =0;
 	for(int i = 0; i < sb.disk_size_blocks; i++) {
         if (bit_map[i] == 0) {
             allocate_block(i);
+			curr_inode.blocks[blockIndex/BLOCK_SIZE_BYTES] = i;
+			blockIndex++;
             to_allocate--;
             if(to_allocate <= 0){
+				write_inode(node_index, &curr_inode);
                 break;
 			}
         }
     }
 
+	sb.num_free_blocks = u_quota();
 	/* what order will you update them in? how will you detect 
 	   a partial operation if it crashes part way through? */
  
-	return 0;
+	return 1;
 }
 
 
@@ -424,8 +439,36 @@ int u_export(char* u_file, char* linux_file) {
 
 	  read the data out of ufs and write it into the external file
 	*/
+	BOOLEAN fileFound = FALSE;
+	int index_of_file = 0;
+	for (int i = 0; i< MAX_FILES_PER_DIRECTORY; i++) {
+		if (!(dir.u_file[i].free)) {
+			if(strcmp(u_file, dir.u_file[i].file_name) == 0) {
+				fileFound = TRUE;
+				index_of_file = i;
+				break;
+			}
+		}
+	}
+	if(fileFound == FALSE){
+		printf("error: file %s not found\n", u_file);
+		return 0;
+	}
 
-	return 0;
+	int whandle = open(linux_file, O_RDWR | O_CREAT);
+	if(whandle == -1){
+		printf("error, writing file %s\n", linux_file);
+		return 0;
+	}
+	read_inode(dir.u_file[index_of_file].inode_number, &curr_inode);
+	for(int i = 0; i < curr_inode.num_blocks; i++){
+		//lseek(virtual_disk, curr_inode.blocks[i], SEEK_SET);
+		lseek(virtual_disk, curr_inode.blocks[i]*BLOCK_SIZE_BYTES, SEEK_SET);
+		read(virtual_disk, &buffer, BLOCK_SIZE_BYTES);
+		write(whandle, &buffer, BLOCK_SIZE_BYTES);
+	}
+
+	return 1;
 }
 
 
@@ -443,8 +486,41 @@ int u_del(char* u_file) {
 
 	  superblock only has to be up-to-date on clean shutdown?
 	*/
+	BOOLEAN fileFound = FALSE;
+	int index_of_file = 0;
+	for (int i = 0; i< MAX_FILES_PER_DIRECTORY; i++) {
+		if (!(dir.u_file[i].free)) {
+			if(strcmp(u_file, dir.u_file[i].file_name) == 0) {
+				fileFound = TRUE;
+				index_of_file = i;
+				break;
+			}
+		}
+	}
+	if(fileFound == FALSE){
+		printf("error: file %s not found\n", u_file);
+		return 0;
+	}
+	//remove(u_file);
+	dir.u_file[index_of_file].free = 1;
+	read_inode(dir.u_file[index_of_file].inode_number, &curr_inode);
+	int blockIndex =0;
+	for(int i = 0; i < sizeof(curr_inode.blocks); i++) {
+        if (bit_map[curr_inode.blocks[i/BLOCK_SIZE_BYTES]] == 0) {
+            free_block(curr_inode.blocks[i]);
+			curr_inode.blocks[blockIndex/BLOCK_SIZE_BYTES] = NULL;
+			blockIndex++;
+        }
+    }
+	curr_inode.free = 1;
+	curr_inode.num_blocks = 0;
+    curr_inode.file_size_bytes = 0;
+    dir.u_file[index_of_file].free = 1;
+    dir.u_file[index_of_file].inode_number = 0;
+    strcpy(dir.u_file[index_of_file].file_name, "");
+	sb.num_free_blocks = u_quota();
 
-	return 0;
+	return 1;
 }
 
 /*
@@ -480,7 +556,7 @@ void u_ls() {
 			loc_tm = localtime(&curr_inode.last_modified);
 			fprintf(stderr,"%s\t%d\t%d/%d\t%d:%d\n",dir.u_file[i].file_name, 
 				curr_inode.num_blocks*BLOCK_SIZE_BYTES, 
-				loc_tm->tm_mon, loc_tm->tm_mday, loc_tm->tm_hour, loc_tm->tm_min);
+				loc_tm->tm_mon+1, loc_tm->tm_mday, loc_tm->tm_hour, loc_tm->tm_min);
 
 		}
 	}
